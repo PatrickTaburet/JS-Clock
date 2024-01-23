@@ -1,0 +1,61 @@
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+}
+h1{
+    margin-top: 30px;
+    text-align: center;
+}
+h2{
+    margin-top: 60px;
+    text-align: center;
+}
+
+/* ------- Analog clock: ---------*/
+
+.bodyClock{
+    width: 600px;
+}
+.clockContainer{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 50px;
+}
+.minutesHand, .secondsHand{
+    display: flex;
+    position: absolute;
+    z-index: 2;
+    scale: -0.5 ;
+    transition: 2s;
+}
+.minutesHand{
+    transform-origin: 180px 85px;
+    top: 214px;
+    left: 121px;
+    
+}
+/* .minutesHand:hover{
+    transform: rotate(180deg);
+} */
+.secondsHand{
+    transform-origin:505px;
+    top: 242px;
+    right: 128px;
+    /* display: none; */
+}
+/* .secondsHand:hover{
+    transform: rotate(360deg);
+} */
+
+/* ------- numeric clock: ---------*/
+
+.numericClock{
+    display: flex;
+    align-items: center;
+}
