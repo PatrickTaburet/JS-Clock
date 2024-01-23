@@ -32,12 +32,13 @@ h2{
     position: absolute;
     z-index: 2;
     scale: -0.5 ;
-    transition: 2s;
+    transition: 0.2s;
 }
 .minutesHand{
     transform-origin: 180px 85px;
     top: 214px;
     left: 121px;
+    transform: rotate(90deg);
     
 }
 /* .minutesHand:hover{
@@ -47,6 +48,7 @@ h2{
     transform-origin:505px;
     top: 242px;
     right: 128px;
+    transform: rotate(-90deg);
     /* display: none; */
 }
 /* .secondsHand:hover{
@@ -55,7 +57,15 @@ h2{
 
 /* ------- numeric clock: ---------*/
 
-.numericClock{
+.numericClockContainer{
     display: flex;
+    flex-direction: column;
     align-items: center;
+}
+.numericClock{
+    text-align: center;
+    width: 150px;
+    height: 50px;
+    font-size: 25px;
+    font-weight: 700;
 }
