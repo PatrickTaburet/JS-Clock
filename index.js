@@ -1,12 +1,18 @@
+
+// clock variables :
 let minutesHand = document.querySelector(".minutesHand");
 let secondsHand = document.querySelector(".secondsHand");
 let hoursHand = document.querySelector(".hoursHand");
+
+// alarm variables :
 
 let alarmInput = document.querySelector(".alarmInput");
 let alarmButton = document.querySelector(".alarmButton");
 let rightBell = document.querySelector(".rightBell");
 let leftBell = document.querySelector(".leftBell");
 let dring = document.querySelector(".dring");
+let littleWheel = document.querySelector(".littleWheel");
+let bigWheel = document.querySelector(".bigWheel");
 
 // Get the current date and houre from API
 
@@ -44,9 +50,22 @@ function rotateHours(){
 
 setInterval(function(){
     secondsHand.style.setProperty('transform', rotateSeconds());
-    // minutesHand.style.setProperty('transform', rotateMinutes());
+    minutesHand.style.setProperty('transform', rotateMinutes());
     hoursHand.style.setProperty('transform', rotateHours());
+    littleWheel.style.setProperty("transform", rotateSeconds());
+    bigWheel.style.setProperty("transform", rotateWheel());
+
 }, 1000);
+
+// Decoration wheels
+
+function rotateWheel(){
+    initSec = initSec + 6;
+    return "rotate(" + (-initSec*2) + "deg)";
+}
+setInterval(function(){
+    bigWheel.style.setProperty("transform", rotateWheel());
+}, 500);
 
 // ------ Bell Alarm ------
 
@@ -63,48 +82,50 @@ function getTime(){
 }
 
 let alarmState = false;
+let alarmValue = "";
 
 function getValue(){
     alarmValue = alarmInput.value;
-    console.log(alarmState);
-    if (alarmState == false){
-        alarmState = true;
-    }else{
-        alarmState = false;
-    }
-    while(alarmState = true){
-        if (alarmValue == getTime()){
-            ringBell()
-        }
-    }
+    alarmState = !alarmState;
+    
+    // if (alarmState == true){
+    //     while(alarmState == true){
+    //         if (alarmValue == getTime()){
+    //             ringBell()
+    //         }
+    //     }
+    
+    // }
+    // console.log(alarmState);
 }
+
+// Bell movement
+
 function moveBell(){
     dring.style.setProperty('transform', 'rotate(90deg)')
     setTimeout(() => {
         dring.style.setProperty('transform', 'rotate(-70deg)')
     }, 250)
+    rightBell.style.setProperty('transform', 'rotate(-3deg)')
+    setTimeout(() => {
+        rightBell.style.setProperty('transform', 'rotate(3deg)')
+    }, 200)
+    leftBell.style.setProperty('transform', 'rotate(-2deg)')
+    setTimeout(() => {
+        leftBell.style.setProperty('transform', 'rotate(2deg)')
+    }, 250)
 }
-
-
 
 function ringBell(){
-
-
-
     setInterval(function(){
         moveBell()
-        
     }, 450);
-
-    // for (i=0; i<20 ; i++){
-    //     dring.style.setProperty('transform', 'rotate(70deg)')
-
-    // }
 }
 
 
-// alarmButton.addEventListener("click", getValue )
+alarmButton.addEventListener("click", getValue )
 alarmButton.addEventListener("click", ringBell )
+
 
 
 // Notes :

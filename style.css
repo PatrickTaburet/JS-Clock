@@ -7,12 +7,16 @@ body{
     background-color: rgb(121, 121, 121);
 }
 h1{
-    margin-top: 30px;
+    font-family: 'MedievalSharp', cursive;
+    margin-top: 40px;
     text-align: center;
+    font-size: 80px;
 }
 h2{
     margin-top: 60px;
     text-align: center;
+    font-size: 45px;
+    font-family: 'MedievalSharp', cursive;
 }
 
 /* ------- Analog clock: ---------*/
@@ -20,7 +24,7 @@ h2{
 .bodyClock{
     width: 600px;
     z-index: 1;
-    opacity: 100%;
+    opacity: 50%;
 }
 .clockContainer{
     display: flex;
@@ -90,6 +94,13 @@ h2{
     font-size: 25px;
     font-weight: 700;
 }
+.alarmButton{
+    width: 130px;
+    height: 40px;
+    margin: 15px;
+    font-size: 17px;
+    font-weight: 700;
+} 
 
 /* -------Dring Alarm------- */
 
@@ -126,4 +137,21 @@ h2{
 .dring:hover{
     transform: rotate(360deg);
     transition: 1.5s;
+}
+
+/* Decorations (engine wheel etc) */
+
+.littleWheel, .bigWheel{
+    position: absolute;
+    scale: 0.4;
+    transition: 0.3s;
+}
+.bigWheel{
+    right: 240px;
+    top : 35px
+}
+.littleWheel{
+    top: -25px;
+    right: 310px;
+    transform: rotate(20deg);
 }
