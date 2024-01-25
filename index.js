@@ -27,12 +27,13 @@ let initSec = -90 + (currentSecond * 6);
 secondsHand.style.setProperty('transform', "rotate(" + initSec + "deg)");
 let initMin = 90 + (currentMinute * 6);
 minutesHand.style.setProperty('transform', "rotate(" + initMin + "deg)");
-let initHour = -90 + ((currentHour > 12 ? (currentHour = currentHour-12) : null) * 30) + (currentMinute * 0.5) ;
+let initHour = -90 + ((currentHour > 12 ? (currentHour = currentHour-12) : currentHour=currentHour) * 30)  + (currentMinute * 0.5) ;
 hoursHand.style.setProperty('transform', "rotate(" + initHour + "deg)");
+
 // functions : calculate the rotation movement for each second
 
 function rotateSeconds(){
-    initSec = initSec + 6;
+    initSec = initSec + 3;
     return "rotate(" + initSec + "deg)";
 }
 
@@ -58,10 +59,11 @@ setInterval(function(){
 }, 1000);
 
 // Decoration wheels
-
+let wheelSec = -90 + (currentSecond * 3);
 function rotateWheel(){
-    initSec = initSec + 6;
-    return "rotate(" + (-initSec*2) + "deg)";
+    
+    wheelSec = wheelSec + 6;
+    return "rotate(" + (-wheelSec) + "deg)";
 }
 setInterval(function(){
     bigWheel.style.setProperty("transform", rotateWheel());
@@ -83,20 +85,27 @@ function getTime(){
 
 let alarmState = false;
 let alarmValue = "";
+console.log(getTime());
 
-function getValue(){
+function alarmCount(){ 
+    setInterval(() => {
+        if (alarmValue == getTime()){
+            ringBell();
+        }console.log(alarmValue);
+    } ,1000);
+}
+
+function putAlarm(){
     alarmValue = alarmInput.value;
     alarmState = !alarmState;
-    
-    // if (alarmState == true){
-    //     while(alarmState == true){
-    //         if (alarmValue == getTime()){
-    //             ringBell()
-    //         }
-    //     }
-    
-    // }
-    // console.log(alarmState);
+    if (alarmState == false){
+        alarmButton.style.backgroundColor = "white";
+        clearInterval(alarmCount());
+        return;
+    } else if (alarmState == true) {
+        alarmButton.style.backgroundColor = "red";
+        alarmCount();      
+    }
 }
 
 // Bell movement
@@ -117,14 +126,16 @@ function moveBell(){
 }
 
 function ringBell(){
-    setInterval(function(){
-        moveBell()
-    }, 450);
+    let interval = setInterval(moveBell, 450);
+    setTimeout(() => {
+        clearInterval(interval)
+    }, 7000);
+    
 }
 
 
-alarmButton.addEventListener("click", getValue )
-alarmButton.addEventListener("click", ringBell )
+alarmButton.addEventListener("click", putAlarm )
+// alarmButton.addEventListener("click", ringBell )
 
 
 

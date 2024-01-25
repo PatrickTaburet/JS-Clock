@@ -4,19 +4,24 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgb(121, 121, 121);
+    background-image: url("/IMG/steampunk.jpg");
+    background-size: cover;
 }
 h1{
     font-family: 'MedievalSharp', cursive;
     margin-top: 40px;
     text-align: center;
     font-size: 80px;
+    color: white;
+    z-index: 3;
 }
 h2{
     margin-top: 60px;
     text-align: center;
     font-size: 45px;
     font-family: 'MedievalSharp', cursive;
+    color: white;
+    z-index: 3;
 }
 
 /* ------- Analog clock: ---------*/
@@ -24,14 +29,14 @@ h2{
 .bodyClock{
     width: 600px;
     z-index: 1;
-    opacity: 50%;
+    opacity: 100%;
 }
 .clockContainer{
     display: flex;
     justify-content: center;
     position: relative;
     z-index: 1;
-    margin-top: 120px;
+    margin-top: 50px;
 }
 .minutesHand, .secondsHand, .hoursHand{
     display: flex;
@@ -48,9 +53,6 @@ h2{
     transform: rotate(-90deg);
     /* display: none; */
 }
-/* .secondsHand:hover{
-    transform: rotate(360deg);
-} */
 
 .minutesHand{
     transform-origin: 180px 85px;
@@ -58,11 +60,8 @@ h2{
     left: 121px;
     transform: rotate(90deg);
     transition: 0.05s;
-    
 }
-/* .minutesHand:hover{
-    transform: rotate(180deg);
-} */
+
 
 .hoursHand{
     transform-origin: 170px 71px ;
@@ -74,13 +73,10 @@ h2{
     right: -49.7px;
     transition: 0.02s;
     transform: rotate(0);
-    
 }
-/* .hoursHand:hover{
-    transform: rotate(180deg);
-} */
 
-/* ------- numeric clock: ---------*/
+
+/* ------- alarm ---------*/
 
 .alarmContainer{
     display: flex;
@@ -93,6 +89,7 @@ h2{
     height: 50px;
     font-size: 25px;
     font-weight: 700;
+    z-index: 3;
 }
 .alarmButton{
     width: 130px;
@@ -100,7 +97,12 @@ h2{
     margin: 15px;
     font-size: 17px;
     font-weight: 700;
+    border-radius: 17px;
 } 
+.alarmButton:hover{
+    opacity: 70%;
+    transition: 0.2s;
+}
 
 /* -------Dring Alarm------- */
 
@@ -154,4 +156,10 @@ h2{
     top: -25px;
     right: 310px;
     transform: rotate(20deg);
+}
+.shadow{
+    width:950px;
+    position: absolute;
+    top: -170px;
+    left: -182px;
 }
