@@ -14,6 +14,7 @@ let dring = document.querySelector(".dring");
 let littleWheel = document.querySelector(".littleWheel");
 let bigWheel = document.querySelector(".bigWheel");
 
+
 // Get the current date and houre from API
 
 let currentDate = new Date();
@@ -89,6 +90,9 @@ console.log(getTime());
 
 function alarmCount(){ 
     setInterval(() => {
+        if (alarmState == false){
+            return;
+        }
         if (alarmValue == getTime()){
             ringBell();
         }console.log(alarmValue);
@@ -98,15 +102,21 @@ function alarmCount(){
 function putAlarm(){
     alarmValue = alarmInput.value;
     alarmState = !alarmState;
-    if (alarmState == false){
-        alarmButton.style.backgroundColor = "white";
-        clearInterval(alarmCount());
-        return;
-    } else if (alarmState == true) {
+    if (alarmState == true) {
         alarmButton.style.backgroundColor = "red";
-        alarmCount();      
+        alarmCount();
+        alarmButton.innerHTML = "ALARM ON";
+        console.log(alarmState)  
     }
 }
+
+function removeAlarm(){
+    alarmButton.style.backgroundColor = "white";
+    alarmState = false;
+    clearInterval(alarmCount());
+    alarmButton.innerHTML = "ALARM OFF";
+}
+
 
 // Bell movement
 
@@ -124,20 +134,31 @@ function moveBell(){
         leftBell.style.setProperty('transform', 'rotate(2deg)')
     }, 250)
 }
-
+let myAudio = document.querySelector("#myAudio");
 function ringBell(){
+    myAudio.currentTime = 18;
+    myAudio.play();
     let interval = setInterval(moveBell, 450);
     setTimeout(() => {
+        removeAlarm()
         clearInterval(interval)
+        myAudio.pause() 
     }, 7000);
     
 }
 
 
-alarmButton.addEventListener("click", putAlarm )
+alarmButton.addEventListener("click", () => {
+    if (alarmState == false){
+        putAlarm();
+    } else if (alarmState == true){
+        removeAlarm();
+        myAudio.pause()    
+    }
+});
 // alarmButton.addEventListener("click", ringBell )
 
-
+console.log(alarmState)
 
 // Notes :
 // 360deg -> 12*60 = 720 min = 43200sec
