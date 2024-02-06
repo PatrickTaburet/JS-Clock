@@ -143,7 +143,7 @@ h2{
 
 /* Decorations (engine wheel etc) */
 
-.littleWheel, .bigWheel{
+.littleWheel, .bigWheel, .secondLittleWheel{
     position: absolute;
     scale: 0.4;
     transition: 0.3s;
@@ -156,6 +156,11 @@ h2{
     top: -25px;
     right: 310px;
     transform: rotate(20deg);
+}
+.secondLittleWheel{
+    top: -17px;
+    left: 308px;
+    transform: rotate(25deg);
 }
 .shadow{
     width:950px;

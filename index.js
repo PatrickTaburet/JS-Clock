@@ -13,7 +13,8 @@ let leftBell = document.querySelector(".leftBell");
 let dring = document.querySelector(".dring");
 let littleWheel = document.querySelector(".littleWheel");
 let bigWheel = document.querySelector(".bigWheel");
-
+let secondLittleWheel = document.querySelector(".secondLittleWheel");
+let myAudio = document.querySelector("#myAudio");
 
 // Get the current date and houre from API
 
@@ -55,6 +56,7 @@ setInterval(function(){
     minutesHand.style.setProperty('transform', rotateMinutes());
     hoursHand.style.setProperty('transform', rotateHours());
     littleWheel.style.setProperty("transform", rotateSeconds());
+    secondLittleWheel.style.setProperty("transform", rotateWheel());
     bigWheel.style.setProperty("transform", rotateWheel());
 
 }, 1000);
@@ -134,8 +136,9 @@ function moveBell(){
         leftBell.style.setProperty('transform', 'rotate(2deg)')
     }, 250)
 }
-let myAudio = document.querySelector("#myAudio");
+
 function ringBell(){
+    myAudio.currentTime = 0;
     myAudio.currentTime = 18;
     myAudio.play();
     let interval = setInterval(moveBell, 450);
