@@ -104,6 +104,7 @@ function alarmCount(){
 function putAlarm(){
     alarmValue = alarmInput.value;
     alarmState = !alarmState;
+    alarmInput.setAttribute("disabled", "");
     if (alarmState == true) {
         alarmButton.style.backgroundColor = "red";
         alarmCount();
@@ -114,10 +115,34 @@ function putAlarm(){
 
 function removeAlarm(){
     alarmButton.style.backgroundColor = "white";
+    alarmInput.removeAttribute("disabled");
     alarmState = false;
     clearInterval(alarmCount());
     alarmButton.innerHTML = "ALARM OFF";
 }
+
+alarmButton.addEventListener("click", () => {
+    if (alarmState == false){
+        putAlarm();
+    } else if (alarmState == true){
+        removeAlarm();
+        myAudio.pause()    
+    }
+});
+
+// Regex on the input to force the user to enter the time in the correct format (HH:MM:SS)
+
+
+let timeRegex = /^(2[0-3]|[0-1]\d):([0-5]\d):([0-5]\d)$/gm;
+
+alarmInput.addEventListener( "input", ()=>{
+   if (timeRegex.test(alarmInput.value)){
+        alarmButton.removeAttribute("disabled");
+   } else {
+        alarmButton.setAttribute("disabled", "");
+   }
+
+});
 
 
 // Bell movement
@@ -150,34 +175,4 @@ function ringBell(){
     
 }
 
-
-alarmButton.addEventListener("click", () => {
-    if (alarmState == false){
-        putAlarm();
-    } else if (alarmState == true){
-        removeAlarm();
-        myAudio.pause()    
-    }
-});
-// alarmButton.addEventListener("click", ringBell )
-
 console.log(alarmState)
-
-// Notes :
-// 360deg -> 12*60 = 720 min = 43200sec
-
-
-// 1min = 0.5 deg
-// 720min = 360 deg
-
-// 1sec = 0.1 deg
-// 3600sec = 360 deg
-
-// 60sec = 360 deg
-// 1sec  = 6deg
-
-// 24h -> 86400 sec
-// 12 -> 43200sec
-// 360/43200 = 0,00833
-// 360deg   = 
-// 43200sec = 1sec
